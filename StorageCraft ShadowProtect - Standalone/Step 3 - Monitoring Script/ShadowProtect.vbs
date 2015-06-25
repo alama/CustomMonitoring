@@ -192,8 +192,46 @@ For Each Job in ShadowProtect.Jobs
         FinalJobStatus = 1 
 
       End If
-      
-    
+     End If
+
+  
+     BackupJob.Status JobStatus
+
+      If Err<>0 Then
+        output.writeline "Status failed" & vbCrLf
+      Else
+                                
+      'In order to make thresholding in WMI possible, we need to map the Job Status codes to a Normal/Warning/Failed value.
+      If JobStatus = 0  then
+        FinalJobStatus = 0  
+      ElseIf JobStatus = 1  Then 
+        FinalJobStatus = 1 
+      ElseIf JobStatus = 2  Then 
+        FinalJobStatus = 1 
+      ElseIf JobStatus = 3  Then 
+        FinalJobStatus = 0 
+      ElseIf JobStatus = 4  Then 
+        FinalJobStatus = 0 
+      ElseIf JobStatus = 5  Then 
+        FinalJobStatus = 1 
+      ElseIf JobStatus = 6  Then 
+        FinalJobStatus = 1 
+      ElseIf JobStatus = 7  Then 
+        FinalJobStatus = 2 
+      ElseIf JobStatus = 8  Then 
+        FinalJobStatus = 2 
+      ElseIf JobStatus = 9  Then 
+        FinalJobStatus = 0 
+      ElseIf JobStatus = 10  Then 
+        FinalJobStatus = 0 
+      ElseIf JobStatus = 11  Then 
+        FinalJobStatus = 1 
+      ElseIf JobStatus = 12  Then 
+        FinalJobStatus = 1 
+      ElseIf JobStatus = 13  Then 
+        FinalJobStatus = 1 
+
+      End If
          
       GetJobStatus
       If JobStatusDescription <> "Queued" Then  ' If the Job Status is anything but 'Queued' then we can get accurate data.
