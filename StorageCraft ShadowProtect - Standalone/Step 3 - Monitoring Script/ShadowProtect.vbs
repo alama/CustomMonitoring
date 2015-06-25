@@ -149,11 +149,7 @@ For Each Job in ShadowProtect.Jobs
     JobName = Job.Description
     output.writeline "The found job is: " & JobName
     Err.Clear    
-    Set BackupJob = ShadowProtect.Jobs.GetBackupJob(JobName)
-    If Err<>0 Then
-      output.writeline "GetBackupJob failed for " & JobName & vbCrLf
-      output.writeline Err
-    Else
+      BackupJob = Job
       BackupJob.GetVolumes volumes
 	
       If Err<>0 Then
@@ -278,7 +274,6 @@ For Each Job in ShadowProtect.Jobs
         output.writeline "Total Time: " & TotalTime & vbCrLf
         output.writeline "Remaining Time: " & remainingTime & vbCrLf
         output.writeline "Throughput: " & bytesPerSecond & vbCrLf
-      End If  
       End If    
     End If 
   End If
